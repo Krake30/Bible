@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta name="description" content="A quiet, searchable reader for the complete World English Bible." />
+    <title>The Common Bible</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#" aria-label="The Common Bible home">
+          <span class="brand-mark" aria-hidden="true">✳</span>
+          <span class="brand-name">the common<br />bible</span>
+        </a>
+
+        <div class="sidebar-label">YOUR LIBRARY</div>
+        <nav class="library-nav" aria-label="Library">
+          <button class="nav-item active" id="read-nav" type="button"><i data-lucide="book-open"></i><span>Read</span></button>
+          <button class="nav-item" id="saved-nav" type="button"><i data-lucide="bookmark"></i><span>Saved verses</span><span class="nav-count" id="saved-count">0</span></button>
+        </nav>
+
+        <div class="book-list-heading">
+          <span class="sidebar-label">BOOKS</span>
+          <button class="text-button" id="testament-toggle" type="button" aria-label="Switch testament">OLD</button>
+        </div>
+        <div class="testament-tabs" role="tablist" aria-label="Testament">
+          <button class="testament-tab selected" type="button" data-testament="OT" role="tab" aria-selected="true">Old Testament</button>
+          <button class="testament-tab" type="button" data-testament="NT" role="tab" aria-selected="false">New Testament</button>
+        </div>
+        <div class="book-list" id="book-list" aria-label="Books of the Bible"></div>
+
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          <span>World English Bible</span>
+          <span class="public-domain">PUBLIC DOMAIN</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" id="menu-toggle" type="button" aria-label="Open books"><i data-lucide="menu"></i></button>
+          <div class="breadcrumb" id="breadcrumb"><span>Old Testament</span><i data-lucide="chevron-right"></i><strong>Genesis</strong><i data-lucide="chevron-right"></i><strong>1</strong></div>
+          <div class="topbar-actions">
+            <form class="reference-search" id="reference-form" role="search">
+              <i data-lucide="search"></i>
+              <input id="reference-input" type="search" placeholder="Find a passage" aria-label="Find a passage, e.g. John 3:16" autocomplete="off" />
+              <kbd>↵</kbd>
+            </form>
+            <span class="topbar-divider"></span>
+            <button class="icon-button" id="font-smaller" type="button" aria-label="Decrease text size" title="Decrease text size"><i data-lucide="minus"></i></button>
+            <span class="type-indicator">Aa</span>
+            <button class="icon-button" id="font-larger" type="button" aria-label="Increase text size" title="Increase text size"><i data-lucide="plus"></i></button>
+          </div>
+        </header>
+
+        <section class="reading-area" id="reading-area">
+          <div class="reading-column">
+            <div class="chapter-kicker"><span class="kicker-line"></span><span id="testament-label">THE FIRST BOOK OF MOSES</span><span class="kicker-line"></span></div>
+            <div class="chapter-heading">
+              <div>
+                <div class="book-overline" id="book-overline">OLD TESTAMENT <span>·</span> THE LAW</div>
+                <h1 id="chapter-title">Genesis <span>1</span></h1>
+              </div>
+              <button class="icon-button save-chapter" id="save-chapter" type="button" aria-label="Save chapter" title="Save chapter"><i data-lucide="bookmark-plus"></i></button>
+            </div>
+
+            <div class="chapter-toolbar">
+              <div class="chapter-selectors">
+                <label class="visually-hidden" for="book-select">Book</label>
+                <select id="book-select" aria-label="Select book"></select>
+                <span class="select-separator"></span>
+                <label class="visually-hidden" for="chapter-select">Chapter</label>
+                <select id="chapter-select" aria-label="Select chapter"></select>
+              </div>
+              <div class="chapter-actions">
+                <button class="icon-button" id="copy-chapter" type="button" aria-label="Copy chapter" title="Copy chapter"><i data-lucide="copy"></i></button>
+                <button class="icon-button" id="print-chapter" type="button" aria-label="Print chapter" title="Print chapter"><i data-lucide="printer"></i></button>
+              </div>
+            </div>
+
+            <div class="passage-meta"><span class="translation-tag">WEB</span><span id="passage-reference">Genesis 1</span><span class="meta-dot">·</span><span id="verse-count">31 verses</span></div>
+            <div class="chapter-text" id="chapter-text" aria-live="polite" aria-busy="true">
+              <div class="loading-state"><span class="loading-mark">✳</span><span>Opening the text…</span></div>
+            </div>
+
+            <footer class="reader-footer">
+              <span>World English Bible <span class="footer-separator">·</span> Public domain</span>
+              <div class="chapter-pagination">
+                <button class="pagination-button" id="previous-chapter" type="button"><i data-lucide="arrow-left"></i><span>Previous</span></button>
+                <span class="pagination-divider"></span>
+                <button class="pagination-button" id="next-chapter" type="button"><span>Next</span><i data-lucide="arrow-right"></i></button>
+              </div>
+            </footer>
+          </div>
+        </section>
+      </main>
+      <div class="mobile-backdrop" id="mobile-backdrop"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </body>
+</html>
